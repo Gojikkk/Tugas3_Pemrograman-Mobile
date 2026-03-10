@@ -1,29 +1,26 @@
 import React from'react';
 import { View, Text, Image, Touch, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import { produk } from '../data/data'
+import { kategori, produk } from '../data/data'
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;
 
 const formatprice = (harga) =>
-    ' Rp ' + harga/toLocaleString('id-ID');
+    ' Rp ' + harga.toLocaleString('id-ID');
 
 const ProductCard  = ({ produk, onPress }) => (
         <TouchableOpacity
-        //card
         style={styles.card}
-        onPress={() => onPress?.(product)}>
+        onPress={() => onPress?.(produk)}>
 
-        //gambar product
         <View style={styles.imageContainer}>
             <Image
-            source={{ uri: produk.image}}
+            source={produk.image}
             style={styles.image}
             resizeMode='cover'
             />
         </View>
 
-        //product info
         <View style={styles.infoContainer}>
             <Text style={styles.name} numberOfLines={2}>{produk.nama}</Text>
             <Text style={styles.kategori}>{produk.kategori}</Text>
@@ -41,9 +38,9 @@ const ProductCard  = ({ produk, onPress }) => (
             elevation: 3,
         },
         imageContainer: { position: 'relative'},
-        imagee: {
+        image: {
             width: '100%',
-            height: 140
+            height: 190
         },
         infoContainer: {
             padding: 10
@@ -56,7 +53,7 @@ const ProductCard  = ({ produk, onPress }) => (
         },
         kategori: {
             fontSize: 13,
-            fontWeight: '400',
+            fontWeight: 'bold',
             color: 'gray',
             lineHeight: 18,
             opacity: 0.5,
@@ -70,3 +67,4 @@ const ProductCard  = ({ produk, onPress }) => (
 
     })
 
+export default ProductCard

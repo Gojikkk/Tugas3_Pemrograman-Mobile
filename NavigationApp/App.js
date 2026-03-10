@@ -1,9 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import RegisterScreen from "../NavigationApp/src/screen/auth/RegisterScreen"
-import LoginScreen from "../NavigationApp/src/screen/auth/LoginScreen"
+import HomeScreen from './src/screen/Home/HomeScreen';
 export default function App() {
   return (
-    <RegisterScreen/>
+    <HomeScreen/>
   )
 }
