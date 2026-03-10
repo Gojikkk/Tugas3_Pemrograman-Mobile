@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TouchableOpacity,TextInput } from 'react-native';
 
-const Register = () => {
-    const [name, setName] = useState('');
+
+
+   
+
+
+const RegisterScreen = ({navigation}) => {
+const [focus, setFocus] = useState(false);
+const [Name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleregister = () => {
-        if (!name || !email || !password || !confirmPassword) {
-            <View style={styles.alert}>
-                <Text style={styles.alertText}>Please fill in all fields</Text>
-            </View>
+        if (!Name || !email || !password || !confirmPassword) {
+        alert ('Please fill in all fields');
         }
         if (password !== confirmPassword) {
-            <View style={styles.alert}>
-                <Text style={styles.alertText}>Passwords do not match</Text>
-            </View>
+        alert ('Passwords do not match');
         }
-    }
-}
-
-const RegisterScreen = () => {
-const [focus, setFocus] = useState(false);
+        }
+    
 
     return (
         <View style={styles.container}>
@@ -31,31 +30,31 @@ const [focus, setFocus] = useState(false);
         </View> 
         
         <View style={styles.keterangan}>
-                        <Text style={styles.keteranganText}>Welcome Back</Text>
-                        <Text style={styles.ket}>Sign in to continue your shopping journey</Text>
+                        <Text style={styles.keteranganText}>Join ShopModern</Text>
+                        <Text style={styles.ket}>Fill in your details to get started with {"\n"}your shopping journey</Text>
         </View>
 
         <View style={styles.form}>
             <Text style={styles.formText}>Name</Text>
-            <TextInput style={[styles.input && styles.inputFocused]} placeholder="Enter your Name" value={name} onChangeText={setName}/>
+            <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Name" value={Name} onChangeText={setName}/>
 
             <Text style={styles.formText}>Email</Text>
-            <TextInput style={[styles.input && styles.inputFocused]} placeholder="Enter your Email" value={email} onChangeText={setEmail}/>
+            <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Email" value={email} onChangeText={setEmail}/>
 
             <Text style={styles.formText}>Password</Text>
-            <TextInput style={[styles.input && styles.inputFocused]} placeholder="Enter your Password" value={password} onChangeText={setPassword}/>
+            <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Password" value={password} onChangeText={setPassword}/>
 
             <Text style={styles.formText}>Confirm Password</Text>
-            <TextInput style={[styles.input && styles.inputFocused]} placeholder="Enter your Password" value={confirmPassword} onChangeText={setConfirmPassword}/>
+            <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Password" value={confirmPassword} onChangeText={setConfirmPassword}/>
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleregister}>
             <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
 
         <View style={styles.login}>
             <Text style={styles.loginText}>Already have an account? </Text>
-            <Pressable onPress={() => navigation.navigate('Login')}>
+            <Pressable onPress={() => navigation.navigate('LoginScreen')}>
                 <Text style={styles.LoginLink}>Login</Text>
             </Pressable>
         </View>
@@ -63,25 +62,27 @@ const [focus, setFocus] = useState(false);
     )
 }
 
-const style = StyleSheet.create({
-    container: {
+
+const styles = StyleSheet.create({
+container: {
         flex: 1,
         backgroundColor: 'white',
     },
-    header: {
+    Header: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
+        marginTop: 50,
     },
-    headerText:{
+    HeaderText:{
         color: '#1F2937',
         fontSize: 20,
         fontWeight: 'bold',
     },
     keterangan: {
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
+        alignItems: 'left',
+        marginTop: 70,
+        paddingLeft: 20,
     },
     logo: {
         width: 100,
@@ -89,23 +90,29 @@ const style = StyleSheet.create({
     },
     keteranganText: {
         color: '#1F2937',
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: 'bold',
-        marginTop: 20,
+        marginTop: 0,
+
     },
     ket: {
-        color: '#ccced0',
+        color: '#c7cacd',
         fontSize: 14,
-        marginTop: 10,
+        marginTop: 5,
+        fontWeight: 'bold'
     },
     form: {
-        marginTop: 20,
-        textAlign: 'Left',
+        marginTop: 40,
+        alignItems: 'flex-start',
+        marginLeft: 20,
     },
     formText: {
         color: '#1F2937',
         fontSize: 16,
         fontWeight: 'bold',
+        marginBottom: 5,
+        alignItems: 'Left',
+        textAlign: 'left',
     },
     input: {
         borderWidth: 1,
@@ -114,6 +121,8 @@ const style = StyleSheet.create({
         padding: 10,
         marginTop: 5,
         marginBottom: 10,
+        width: `95%`,
+        height: 60,
     },
     inputFocused: {
         borderColor: '#4A5CC4',
@@ -121,22 +130,28 @@ const style = StyleSheet.create({
     },
     button: {
         backgroundColor: '#4A5CC4',
-        width: '100%',
-        borderRadius: 5,
+        width: '90%',
+        height: 60,
+        borderRadius: 8,
         padding: 10,
         alignItems: 'center',
+        justifyContent: 'center',
         marginTop: 20,
+        alignSelf: 'center',
     },
-    buttontext: {
+    buttonText: {
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
     },
     login: {
         marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     loginText: {
-        color: '#ccced0',
+        color: '#c3c5c7',
         fontSize: 14,
     },
     LoginLink: {
@@ -145,3 +160,5 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
     }
 })
+
+export default RegisterScreen
