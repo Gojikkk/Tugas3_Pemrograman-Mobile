@@ -14,4 +14,4 @@ function HomeStack() {
   );
 }
 
-export default HomeStack; // ✅ export HomeStack
+export default HomeStack;

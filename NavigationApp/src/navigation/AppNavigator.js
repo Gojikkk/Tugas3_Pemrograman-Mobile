@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AuthNavigator from "./AuthNavigator";
-import HomeTabs from "./HomeTabs"; // ✅ ganti import ini
+import HomeTabs from "./HomeTabs"; 
 import HomeStack from "./HomeStack";
 
 const Stack = createNativeStackNavigator();
