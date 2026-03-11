@@ -3,15 +3,27 @@ import { View,StyleSheet, Text, TextInput, TouchableOpacity, Image, Pressable } 
 
 
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({navigation, onLoginSuccess}) => {
 
 const [focus, setFocus] = useState(false);
 
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+
+
+
+
+    const handleLogin = () => {
+        if (!email || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+        onLoginSuccess();
+    }
+
+
     return (
         <View style={{flex:1}}>
-        <View style={styles.Header}>
-            <Text style={styles.HeaderText}>shopModern</Text>
-        </View>
         <View style={styles.container}>
 
             <View style={styles.keterangan}>
@@ -21,19 +33,19 @@ const [focus, setFocus] = useState(false);
 
             <View style={styles.form}>
                 <Text style={styles.formText}>Email</Text>
-                <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Email"/>
+                <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Email" value={email} onChangeText={setEmail}/>
 
                 <Text style={styles.formText}>Password</Text>
-                <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Password"/>
+                <TextInput style={[styles.input, focus && styles.inputFocused]} placeholder="Enter your Password" value={password} onChangeText={setPassword}/>
             </View>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
 
             <View style={styles.register}>
                 <Text style={styles.registerText}>Don't have an account? </Text>
-            <Pressable onPress={() => navigation.navigate('RegisterScreen')}>
+            <Pressable onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.registerLink}>Create an account</Text>
             </Pressable>
             </View>
@@ -46,16 +58,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-    },
-    Header: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 50,
-    },
-    HeaderText:{
-        color: '#1F2937',
-        fontSize: 20,
-        fontWeight: 'bold',
     },
     keterangan: {
         justifyContent: 'center',

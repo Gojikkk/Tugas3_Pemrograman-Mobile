@@ -1,0 +1,75 @@
+import React from'react';
+import { View, Text, Image, Touch, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { kategori, produk } from '../data/data'
+
+const { width } = Dimensions.get('window');
+const CARD_WIDTH = (width - 48) / 2;
+
+const formatprice = (harga) =>
+    ' Rp ' + harga.toLocaleString('id-ID');
+
+const ProductCard  = ({ produk, onPress }) => (
+        <TouchableOpacity
+        style={styles.card}
+        onPress={() => onPress?.(produk)}>
+
+        <View style={styles.imageContainer}>
+            <Image
+            source={produk.image}
+            style={styles.image}
+            resizeMode='cover'
+            />
+        </View>
+
+        <View style={styles.infoContainer}>
+            <Text style={styles.name} numberOfLines={2}>{produk.nama}</Text>
+            <Text style={styles.kategori}>{produk.kategori}</Text>
+            <Text style={styles.harga}>{formatprice(produk.harga)}</Text>
+        </View>
+        </TouchableOpacity>
+    );
+
+    const styles = StyleSheet.create({
+    card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+        overflow: 'hidden',
+    elevation: 3,
+    borderRadius: 14,
+    padding: 12,
+    marginBottom: 12,
+    },
+
+    image: {
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    backgroundColor: '#EEE',
+    },
+        infoContainer: {
+            padding: 10
+        },
+        name: {
+            fontSize: 13,
+            fontWeight: '600',
+            color: 'black',
+            lineHeight: 18,
+        },
+        kategori: {
+            fontSize: 13,
+            fontWeight: 'bold',
+            color: 'gray',
+            lineHeight: 18,
+            opacity: 0.5,
+        },
+        harga: {
+            fontSize: 13,
+            fontWeight: '600',
+            color: 'blue',
+            lineHeight: 18,
+        },
+
+    })
+
+export default ProductCard

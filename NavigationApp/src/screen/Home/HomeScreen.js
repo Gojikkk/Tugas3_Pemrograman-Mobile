@@ -4,7 +4,8 @@ import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity,
 import { kategori, produk } from '../../data/data';
 import ProductCard from '../../components/ProductCard';
 
-const HomeScreen = () => {
+
+const HomeScreen = ({navigation}) => {
 const [search, setSearch] = useState('');
 const [activeCategory, setActiveCategory] = useState('Semua');
 
@@ -20,12 +21,17 @@ const filtered = useMemo (() => {
 const renderItem = ({item, index}) => {
     return (
     <View style={[styles.cardWrapper, index % 2 === 0 && styles.cardLeft]}>
-        <ProductCard produk={item} onPress={ (p) => console.log('Lihat Produk: ', p.nama)}></ProductCard>
+        <ProductCard 
+                produk={item} 
+           onPress={() => navigation.navigate('Detail', { p: item })}
+            />
     </View>
     );
 }
     return (
+        
         <View style={styles.screen}>
+            
                 <TextInput
                 placeholder="Search Product"
                 value={search}
@@ -86,7 +92,7 @@ const styles = StyleSheet.create ({
         width: '90%',
         height: 50,
         alignSelf: 'center',
-        marginTop: 20
+        marginTop: -10
     },
     keterangan: {
         marginTop: 15,

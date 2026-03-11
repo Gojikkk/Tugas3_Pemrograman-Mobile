@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, TouchableOpacity,TextInput } from 'react-native';
 
 
-
-   
-
-
-const RegisterScreen = ({navigation}) => {
+const RegisterScreen = ({navigation, onLoginSuccess}) => {
 const [focus, setFocus] = useState(false);
 const [Name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -16,18 +12,18 @@ const [Name, setName] = useState('');
     const handleregister = () => {
         if (!Name || !email || !password || !confirmPassword) {
         alert ('Please fill in all fields');
+        return;
         }
         if (password !== confirmPassword) {
         alert ('Passwords do not match');
+        return;
         }
+        onLoginSuccess();
         }
     
 
     return (
         <View style={styles.container}>
-        <View style={styles.Header}>
-            <Text style={styles.HeaderText}>Create Account</Text>
-        </View> 
         
         <View style={styles.keterangan}>
                         <Text style={styles.keteranganText}>Join ShopModern</Text>
@@ -54,7 +50,7 @@ const [Name, setName] = useState('');
 
         <View style={styles.login}>
             <Text style={styles.loginText}>Already have an account? </Text>
-            <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+            <Pressable onPress={() => navigation.navigate('Login')}>
                 <Text style={styles.LoginLink}>Login</Text>
             </Pressable>
         </View>
@@ -68,21 +64,12 @@ container: {
         flex: 1,
         backgroundColor: 'white',
     },
-    Header: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 50,
-    },
-    HeaderText:{
-        color: '#1F2937',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
     keterangan: {
         justifyContent: 'center',
         alignItems: 'left',
         marginTop: 70,
         paddingLeft: 20,
+        marginTop: 50
     },
     logo: {
         width: 100,
